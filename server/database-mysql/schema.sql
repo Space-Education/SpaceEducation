@@ -1,13 +1,12 @@
-DROP DATABASE IF EXISTS mvp;
+DROP DATABASE IF EXISTS spaceED;
 
-CREATE DATABASE mvp;
+CREATE DATABASE spaceED;
 
-USE mvp;
+USE spaceED;
 
-CREATE TABLE items (
+CREATE TABLE postLecture (
   id int NOT NULL AUTO_INCREMENT,
-  quantity integer NOT NULL,
-  description varchar(50) NOT NULL,
+  url varchar(950)NOT NULL,
   PRIMARY KEY (ID)
 );
 
