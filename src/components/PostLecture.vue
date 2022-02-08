@@ -1,5 +1,6 @@
 
 <script>
+import axios from 'axios';
 export default {
     data() {
         return {
@@ -29,10 +30,11 @@ export default {
                 description: this.description
 
             }
-            axios.post('api/items',option).then((result)=>{
-                console.log(result)
+            axios.post('api/items/lecture',option).then((response) => {
+                console.log(response)
+            }).catch((error)=>{
+                console.log(error)
             })
-            console.log(option)
         }
     }
 
