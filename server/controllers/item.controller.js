@@ -9,6 +9,9 @@ var selectAll = function (req, res) {
     }
   });
 };
+var postLecture=function(req, res){
+  var lecture="INSERT INTO postLecture VALUE = ?"
+}
 
 
 module.exports = { selectAll };

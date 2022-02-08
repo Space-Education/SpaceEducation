@@ -1,7 +1,11 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
+import Feed from './components/Feed.vue';
+import PostLecture from './components/PostLecture.vue';
 </script>
 
 <template>
-  <h1>Hello world</h1>
+<PostLecture />
+<Feed />
+<HelloWorld />
 </template>
