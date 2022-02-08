@@ -1,7 +1,9 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
+import Feed from './components/Feed.vue';
 </script>
 
 <template>
-  <h1>Hello world</h1>
+<Feed />
+<HelloWorld />
 </template>
