@@ -1,11 +1,16 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import Feed from './components/Feed.vue';
-import PostLecture from './components/PostLecture.vue';
+<script>
 </script>
 
+
 <template>
-<PostLecture />
-<Feed />
-<HelloWorld />
+  <NavBar />
+  <div>
+    Space Education
+    <router-link to="/Feed"> Feed </router-link>
+    <router-link to="/Post"> Post </router-link>
+    <router-link to="/Signin"> Signin </router-link>
+    <router-link to="/Signup"> Signup </router-link>
+    <router-link to="/AboutUs"> AboutUs </router-link>
+  </div>
+  <router-view/>
 </template>
