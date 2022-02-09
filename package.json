@@ -10,7 +10,9 @@
   "dependencies": {
     "express": "^4.17.2",
     "mysql": "^2.18.1",
-    "vue": "^3.2.25"
+    "nodemon": "^2.0.15",
+    "vue": "^3.2.29",
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.0.0",

@@ -1,7 +1,16 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
+<script>
 </script>
 
+
 <template>
-  <h1>Hello world</h1>
+  <NavBar />
+  <div>
+    Space Education
+    <router-link to="/Feed"> Feed </router-link>
+    <router-link to="/Post"> Post </router-link>
+    <router-link to="/Signin"> Signin </router-link>
+    <router-link to="/Signup"> Signup </router-link>
+    <router-link to="/AboutUs"> AboutUs </router-link>
+  </div>
+  <router-view/>
 </template>
