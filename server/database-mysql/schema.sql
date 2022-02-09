@@ -6,7 +6,9 @@ USE spaceED;
 
 CREATE TABLE postLecture (
   id int NOT NULL AUTO_INCREMENT,
-  url varchar(950)NOT NULL,
+  title varchar(350) NOT NULL,
+  image varchar(950)NOT NULL,
+  description varchar(350) NOT NULL,
   PRIMARY KEY (ID)
 );
 
