@@ -9,6 +9,17 @@ var selectAll = function (req, res) {
     }
   });
 };
+var postLecture=function(req, res){
+  var lecture="INSERT INTO postLecture SET ?"
+  var params={image:req.body.image, title:req.body.title,description:req.body.description}
+  db.query(lecture,params,(err,results)=>{
+    if(err) {
+      console.log(err)
+    }else{
+      res.send(results)
+    }
+  })
+}
 
 
-module.exports = { selectAll };
+module.exports = { selectAll,postLecture };
