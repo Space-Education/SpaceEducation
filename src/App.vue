@@ -26,6 +26,7 @@ export default {
       .then((response) => {
         this.posts = response.data
         console.log(this.posts);
+        location.reload();
          localStorage.setItem('posts', JSON.stringify(this.posts))
       })
      

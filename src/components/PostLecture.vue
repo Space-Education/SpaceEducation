@@ -38,6 +38,7 @@ export default {
             console.log(option)
             axios.post('http://localhost:3001/api/items/lecture', option).then((response) => {
                 console.log(response)
+                
             }).catch((error) => {
                 console.log(error)
             })
@@ -66,6 +67,6 @@ export default {
         <h1>description</h1>
         <input @input="change2" />
 
-        <button v-on:click="add()">Submit</button>
+        <button v-on:click="add();">Submit</button>
     </div>
 </template>
