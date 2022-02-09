@@ -3,22 +3,20 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      url: 'http://localhost:3001/api/items/getdata',
-      post: []
+      
+      posts: JSON.parse(localStorage.getItem('posts')),
     }
   },
   methods: {
-    getUser: function () {
-      axios.get(this.url).then((response) => {
-        this.post = response.data
+   
         
-      })
+   
       
     }
     
   }
   
-}
+
 
 
 
@@ -27,16 +25,17 @@ export default {
 
 <template>
   <div class="parent">
-    <div class="Lecture" v-for="elem in this.post" :key="elem.type">
-      <img :src="elem.image" alt="ss" style="width:100%" />
+    <div class="Lecture" v-for="elem in this.posts" :key="elem">
+      <img :src="elem.image"  style="width:100%" />
       <h1>{{ elem.title }}</h1>
-      <p>Harvard University</p>
+      <p>{{elem.description}}</p>
+      <h3>{{elem.label}}</h3>
       <p>
         <button>Contact</button>
       </p>
     </div>
   </div>
-      <button class="list" @click="getUser">List</button>
+      
 
 </template>
 <style scoped>
