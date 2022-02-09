@@ -1,7 +1,7 @@
 var db = require("../database-mysql");
 
 var selectAll = function (req, res) {
-  db.query("SELECT * FROM items", (err, items, fields) => {
+  db.query("SELECT * FROM postLecture", (err, items, fields) => {
     if (err) {
       res.status(500).send(err);
     } else {

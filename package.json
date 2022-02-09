@@ -13,6 +13,7 @@
     "express": "^4.17.2",
     "mysql": "^2.18.1",
     "vue": "^3.2.29",
+    "vue-axios": "^3.4.1",
     "vue-images": "^1.1.0"
   },
   "devDependencies": {
