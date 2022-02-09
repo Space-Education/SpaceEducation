@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const itemController = require("../controllers/item.controller");
 
-router.get("/", itemController.selectAll);
+router.get("/getdata", itemController.selectAll);
 router.post("/lecture", itemController.postLecture);
 
 
