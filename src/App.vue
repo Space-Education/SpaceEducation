@@ -38,7 +38,6 @@ export default {
 
 <template>
   <div className="center"></div>
-
   <ul>
     <li>
       <a > <router-link to="/Feed"> Feed </router-link> </a>
@@ -65,7 +64,7 @@ export default {
   font-size: 28px;
 } */
 .center {
-  text-align: center;
+  float: center;
 }
 ul {
   list-style-type: none;
