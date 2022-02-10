@@ -1,23 +1,29 @@
 
 <script>
+import App from "../App.vue"
 import axios from 'axios';
 export default {
+    
     data() {
         return {
             title: "",
-            image: "",
             description: "",
+            datatype:JSON.parse(localStorage.getItem('type')),
+            id_type:null,
+            url: 'http://localhost:3001/api/items/getdata'
         }
 
     },
     methods: {
+
+
         change(event) {
             this.title = event.target.value
-            console.log(this.title)
+            console.log(this.datatype)
         },
         change1(event) {
-            this.image = event.target.value
-            console.log(this.image)
+            this.id_type = event.target.value
+            console.log(this.id_type)
         },
         change2(event) {
             this.description = event.target.value
@@ -25,21 +31,23 @@ export default {
         },
         add() {
             var option = {
-                image: this.image,
+                id_type: this.id_type,
                 title: this.title,
                 description: this.description
-
             }
             console.log(option)
-            axios.post('http://localhost:3001/api/items/lecture',option).then((response) => {
+            axios.post('http://localhost:3001/api/items/lecture', option).then((response) => {
                 console.log(response)
-            }).catch((error)=>{
+                
+            }).catch((error) => {
                 console.log(error)
             })
         }
-    }
 
+    }
 }
+
+
 </script>
 
 
@@ -47,10 +55,17 @@ export default {
     <!-- <div>
         <h1>Title</h1>
         <input :value="title" @input="change" />
-        <h1>image For The Lecture</h1>
-        <input :value="image" @input="change1" />
+        <h1>type of The Lecture</h1>
+        <select @input="change1">
+            
+            <option  value="">select type of lecture</option>
+            
+            <option v-for="elem in this.datatype" :key="elem" :value="elem.id_type"  >{{ elem.label }}</option>
+            
+        </select>
+
         <h1>description</h1>
-        <input :value="description" @input="change2" />
+        <input @input="change2" />
 
         <button v-on:click="add()">Submit</button>
     </div> -->
