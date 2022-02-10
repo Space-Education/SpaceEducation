@@ -1,75 +1,51 @@
 
 <script>
-// import App from "../App.vue"
-import axios from 'axios';
+import App from "../App.vue";
+import axios from "axios";
 export default {
-    
-    data() {
-        return {
-            title: "",
-            description: "",
-            datatype:JSON.parse(localStorage.getItem('type')),
-            id_type:null,
-            url: 'http://localhost:3001/api/items/getdata'
-        }
-
+  data() {
+    return {
+      title: "",
+      description: "",
+      datatype: JSON.parse(localStorage.getItem("type")),
+      user: JSON.parse(localStorage.getItem("user")),
+      id_type: null,
+      // url: 'http://localhost:3001/api/items/getdata'
+    };
+  },
+  methods: {
+    change(event) {
+      this[event.target.name] = event.target.value;
+      console.log(this[event.target.name]);
     },
-    methods: {
-
-
-        change(event) {
-            this.title = event.target.value
-            console.log(this.datatype)
-        },
-        change1(event) {
-            this.id_type = event.target.value
-            console.log(this.id_type)
-        },
-        change2(event) {
-            this.description = event.target.value
-            console.log(this.description)
-        },
-        add() {
-            var option = {
-                id_type: this.id_type,
-                title: this.title,
-                description: this.description
-            }
-            console.log(option)
-            axios.post('http://localhost:3001/api/items/lecture', option).then((response) => {
-                console.log(response)
-                
-            }).catch((error) => {
-                console.log(error)
-            })
-        }
-
-    }
-}
-
-
+    add() {
+      var option = { 
+        title: this.title,
+        description: this.description,
+        image_post:this.image_post,
+        id_type: this.id_type,
+        id_user:this.user.id_user
+      };
+      console.log(option);
+      axios
+        .post("http://localhost:3001/api/items/posts", option)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
+};
 </script>
 
 
 <template>
-    <!-- <div>
-        <h1>Title</h1>
-        <input :value="title" @input="change" />
-        <h1>type of The Lecture</h1>
-        <select @input="change1">
-            
-            <option  value="">select type of lecture</option>
-            
-            <option v-for="elem in this.datatype" :key="elem" :value="elem.id_type"  >{{ elem.label }}</option>
-            
-        </select>
-
-        <h1>description</h1>
-        <input @input="change2" />
-
-        <button v-on:click="add()">Submit</button>
-    </div> -->
-      <div class="login-root">
+  <!-- <div>
+        
+  </div>-->
+  <div class="login-root">
     <div
       class="box-root flex-flex flex-direction--column"
       style="min-height: 100vh; flex-grow: 1"
@@ -176,33 +152,36 @@ export default {
             flex-justifyContent--center
           "
         >
-          <h1>
-            <a rel="dofollow">Add a lecture</a
-            >
-          </h1>
+          <h1></h1>
         </div>
         <div class="formbg-outer">
           <div class="formbg">
             <div class="formbg-inner padding-horizontal--48">
               <span class="padding-bottom--15">Add a lecture</span>
-                <div class="field padding-bottom--24">
-                  <label for="text">Title of the lecture:</label>
-                  <input type="text" name="text" :value="title" @input="change"/>
-                </div>
-                <div class="field padding-bottom--24">
-                  <label for="text">Link of the image:</label>
-                  <input type="text" name="text" :value="image" @input="change1" />
-                </div>
-                <div class="field padding-bottom--24">
-                  <div class="grid--50-50">
-                    <label for="text">description</label>
-                  </div>
-                  <input type="text" name="text" :value="description" @input="change2" />
-                </div>
-                <div class="field padding-bottom--24">
-                  <input type="submit" v-on:click="add()" />
-                </div>
-            
+              <!-- <form id="stripe-login"> -->
+              <div class="field padding-bottom--24">
+                <h1>Title</h1>
+                <input name="title" :value="title" @input="change" />
+                
+                <h1>description</h1>
+                <input name="description" @input="change2" />
+                <h1>type of The Lecture</h1>
+                <select name="id_type" @input="change">
+                  <option value="">select type of lecture</option>
+
+                  <option
+                    v-for="elem in this.datatype"
+                    :key="elem"
+                    :value="elem.id_type"
+                  >
+                    {{ elem.label_type }}
+                  </option>
+                </select>
+
+                <h1>image</h1>
+                <input name="image_post" type="text" @input="change"/>
+                <button v-on:click="add()">Submit</button>
+              </div>
             </div>
           </div>
         </div>
@@ -426,5 +405,4 @@ a.ssolink {
     transform: translateX(0px);
   }
 }
-
 </style>

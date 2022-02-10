@@ -4,7 +4,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      urlgetpost: "http://localhost:3001/api/items/getdata",
+      urlgetpost: "http://localhost:3001/api/items/homePosts",
       urlgettype: "http://localhost:3001/api/items/type",
       posts: [],
     };
@@ -18,12 +18,14 @@ export default {
       });
     },
     getPostHome: function () {
-      axios.get("http://localhost:3001/api/items/getdata").then((response) => {
-        this.posts = response.data;
-        console.log(this.posts);
-        location.reload();
-        localStorage.setItem("posts", JSON.stringify(this.posts));
-      });
+      axios
+        .get("http://localhost:3001/api/items/homePosts")
+        .then((response) => {
+          this.posts = response.data;
+          console.log(this.posts);
+          // location.reload();
+          localStorage.setItem("posts", JSON.stringify(this.posts));
+        });
     },
   },
 };
@@ -36,10 +38,10 @@ export default {
     <ul>
       <div className="centerReste">
         <li>
-          <a> <router-link to="/Feed"> Feed </router-link> </a>
+          <a> <router-link to="/Feed"  @click="getPostHome"> Feed </router-link> </a>
         </li>
         <li>
-          <a> <router-link to="/Post"> Post </router-link> </a>
+          <a> <router-link to="/Post"  @click="getType"> Post </router-link> </a>
         </li>
         <li>
           <a> <router-link to="/AboutUs"> AboutUs </router-link> </a>
@@ -56,6 +58,7 @@ export default {
     </ul>
   </div>
   <router-view />
+  
   <div>
     <div class="sidenav">
       <div class="plus">
@@ -68,8 +71,8 @@ export default {
       <a>English</a>
     </div>
   </div>
+  
 </template>
-
 
 <style>
 /* body {
