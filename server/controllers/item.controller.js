@@ -117,7 +117,7 @@ var insertUser = function (req, res) {
     } else {
       res.send(results)
     }
-  })
-}
+  });
+};
 
 module.exports = { selectCategory, selectAllPosts, insertPost, selectTypes, insertType, insertUser, selectUser, selectAllPostsUser, insertCategory };
