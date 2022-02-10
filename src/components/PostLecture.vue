@@ -1,6 +1,6 @@
 
 <script>
-import App from "../App.vue"
+// import App from "../App.vue"
 import axios from 'axios';
 export default {
     
@@ -177,8 +177,7 @@ export default {
           "
         >
           <h1>
-            <a href="http://blog.stackfindover.com/" rel="dofollow"
-              >Add a lecture</a
+            <a rel="dofollow">Add a lecture</a
             >
           </h1>
         </div>
@@ -186,7 +185,6 @@ export default {
           <div class="formbg">
             <div class="formbg-inner padding-horizontal--48">
               <span class="padding-bottom--15">Add a lecture</span>
-              <form id="stripe-login">
                 <div class="field padding-bottom--24">
                   <label for="text">Title of the lecture:</label>
                   <input type="text" name="text" :value="title" @input="change"/>
@@ -204,7 +202,7 @@ export default {
                 <div class="field padding-bottom--24">
                   <input type="submit" v-on:click="add()" />
                 </div>
-              </form>
+            
             </div>
           </div>
         </div>
