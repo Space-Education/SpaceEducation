@@ -7,11 +7,11 @@ import Signin from './components/Signin.vue'
 import AboutUs from './components/AboutUs.vue'
 
 const routes = [
-	{
-		path: '/',
-		name: 'Home',
-		component: Home,
-	},
+	// {
+	// 	path: '/',
+	// 	name: 'Home',
+	// 	component: Home,
+	// },
     {
         path: '/Feed',
         name: 'Feed',

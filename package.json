@@ -8,6 +8,7 @@
     "server": "nodemon server/index.js"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.2",
     "axios": "^0.25.0",
     "balanced-match": "^2.0.0",
     "bootstrap": "^5.1.3",
