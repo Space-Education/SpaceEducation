@@ -8,28 +8,21 @@ export default {
     }
   },
   methods: {
-   
-        
-   
-      
-    }
-    
+    } 
   }
-  
-
-
-
-
 
 </script>
 
 <template>
   <div class="parent">
     <div class="Lecture" v-for="elem in this.posts" :key="elem">
-      <img :src="elem.image"  style="width:100%" />
+      <img :src="elem.image_post"  style="width:100%" />
       <h1>{{ elem.title }}</h1>
+      <h2>{{ elem.firstName }} {{ elem.lastName }} </h2>
       <p>{{elem.description}}</p>
-      <h3>{{elem.label}}</h3>
+      <h3>{{elem.label_type}}</h3>
+      <img style="width:10%" :src="elem.image_type"/>
+      
       <p>
         <button>Contact</button>
       </p>
