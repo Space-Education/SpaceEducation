@@ -32,23 +32,27 @@ export default {
 
 
 <template>
-  <div className="center">
+  <div>
     <ul>
-      <li>
-        <a> <router-link to="/Feed"> Feed </router-link> </a>
-      </li>
-      <li>
-        <a> <router-link to="/Post"> Post </router-link> </a>
-      </li>
-      <li>
-        <a> <router-link to="/Signin"> Signin </router-link> </a>
-      </li>
-      <li>
-        <a> <router-link to="/Signup"> Signup </router-link> </a>
-      </li>
-      <li>
-        <a> <router-link to="/AboutUs"> AboutUs </router-link> </a>
-      </li>
+      <div className="centerReste">
+        <li>
+          <a> <router-link to="/Feed"> Feed </router-link> </a>
+        </li>
+        <li>
+          <a> <router-link to="/Post"> Post </router-link> </a>
+        </li>
+        <li>
+          <a> <router-link to="/AboutUs"> AboutUs </router-link> </a>
+        </li>
+      </div>
+      <div className="center">
+        <li>
+          <a> <router-link to="/Signin"> Signin </router-link> </a>
+        </li>
+        <li>
+          <a> <router-link to="/Signup"> Signup </router-link> </a>
+        </li>
+      </div>
     </ul>
   </div>
   <router-view />
@@ -72,7 +76,12 @@ export default {
   font-size: 28px;
 } */
 .center {
-  float: center;
+  position: absolute;
+  left: 1450px;
+}
+.centerReste {
+  position: left;
+  left: 500px;
 }
 ul {
   list-style-type: none;
