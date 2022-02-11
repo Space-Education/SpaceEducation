@@ -7,6 +7,8 @@ import Login from './components/Login.vue'
 import AboutUs from './components/AboutUs.vue'
 import Payment from "./components/Payment.vue"
 import Profil from "./components/ProfilUser.vue"
+import AddTeacher from './components/AddTeacher.vue'
+import AddType from './components/AddType.vue'
 
 const routes = [
 	// {
@@ -53,6 +55,16 @@ const routes = [
         path:"/Profil",
         name:'Profil',
         component:Profil
+    },
+    {
+        path:"/ListUser",
+        name:'ListUser',
+        component:AddTeacher
+    },
+    {
+        path:"/AddType",
+        name:'AddType',
+        component:AddType
     },
 ];
 
