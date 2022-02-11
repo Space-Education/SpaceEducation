@@ -21,13 +21,7 @@ export default {
             this[event.target.name] = event.target.value
             console.log(this[event.target.name])
         },
-        // changeLastName(event) {
-
-        // },
-        // change2(event) {
-        //     this.description = event.target.value
-        //     console.log(this.description)
-        // },
+        
         add() {
             var option = {
                 firstName: this.firstName,
@@ -36,7 +30,7 @@ export default {
                 password: this.password,
                 phone: this.phone,
                 dob: this.dob,
-                id_category:1,
+                id_category:2,
                 image_user:this.image_user
             }
             console.log(option)
