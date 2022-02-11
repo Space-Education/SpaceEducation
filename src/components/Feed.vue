@@ -1,62 +1,90 @@
 <script>
-export default{
-    data(){
-        return {
-            lecture :[
-    {
-      name: "Charmander",
-      type: "fire",
-      image: "https://i2.wp.com/le-carnet-et-les-instants.net/wp-content/uploads/2017/08/lecture.jpg?fit=3008%2C2000"
+import axios from "axios";
+import NavBar from './NavBar.vue'
+import PostLecture from "./PostLecture.vue"
+import Search from "./Serach.vue"
+import ProfilUser from "./ProfilUser.vue"
+export default {
+  
+  components: {
+    NavBar,
+    PostLecture,
+    Search
+  },
+  data() {
+    return {
+      posts: [],
+      allposts:[],
+      index:'',
+      value:'',
+      profil:{},
+    };
+  },
+  mounted() {
+    axios.get("http://localhost:3001/api/items/homePosts").then((response) => {
+      this.posts = response.data;
+      this.allposts=response.data
+      console.log(this.posts);
+      // location.reload();
+      // localStorage.setItem("posts", JSON.stringify(this.posts));
+    });
+  },
+  methods: {
+    change(e){
+      this.index=e.target.value
+      console.log(this.index);
+      axios.get(`http://localhost:3001/api/items/homePosts/${this.index}`)
+      .then(res=>{
+        this.posts=res.data
+        console.log(this.posts)})
     },
-    {
-      name: "Squirtle",
-      type: "water",
-      image: "https://us.123rf.com/450wm/dogfella/dogfella1908/dogfella190800093/129201755-femme-gros-plan-en-tissu-d%C3%A9contract%C3%A9-tenir-le-vieux-livre-de-poche-%C3%A0-lire.jpg?ver=6"
+    onchange(e) {
+      this.value = e.target.value;
+      console.log(this.value);
     },
-    {
-      name: "Squirtle",
-      type: "water",
-      image: "https://us.123rf.com/450wm/dogfella/dogfella1908/dogfella190800093/129201755-femme-gros-plan-en-tissu-d%C3%A9contract%C3%A9-tenir-le-vieux-livre-de-poche-%C3%A0-lire.jpg?ver=6"
-    },
-    {
-      name: "Squirtle",
-      type: "water",
-      image: "https://us.123rf.com/450wm/dogfella/dogfella1908/dogfella190800093/129201755-femme-gros-plan-en-tissu-d%C3%A9contract%C3%A9-tenir-le-vieux-livre-de-poche-%C3%A0-lire.jpg?ver=6"
-    },
-    {
-      name: "Squirtle",
-      type: "water",
-      image: "https://us.123rf.com/450wm/dogfella/dogfella1908/dogfella190800093/129201755-femme-gros-plan-en-tissu-d%C3%A9contract%C3%A9-tenir-le-vieux-livre-de-poche-%C3%A0-lire.jpg?ver=6"
-    },
-    {
-      name: "Squirtle",
-      type: "water",
-      image: "https://us.123rf.com/450wm/dogfella/dogfella1908/dogfella190800093/129201755-femme-gros-plan-en-tissu-d%C3%A9contract%C3%A9-tenir-le-vieux-livre-de-poche-%C3%A0-lire.jpg?ver=6"
-    }]
+    search() {
+      var newArray=[]
+      this.posts=[]
+        for(var i=0;i<this.allposts.length;i++){ 
+          if(this.allposts[i].firstName.includes(this.value)||this.allposts[i].label_type.includes(this.value)||this.allposts[i].lastName.includes(this.value)){
+            newArray.push(this.allposts[i])
+          }  
         }
+        this.posts=newArray;
+    },
+    savePerson(id){
+      axios.get(`http://localhost:3001/api/items/user/${id}`).then(res=>{
+        this.profil=res.data                    
+        this.profil.user_id=id
+        console.log(this.profil);                       
+        localStorage.setItem("profil", JSON.stringify(this.profil));
+        localStorage.setItem("key",1)
+      })
     }
-    
-}
-
-
-
-
+  },
+};
 </script>
 
 <template>
-<div class="parent">
-<div class="Lecture"   v-for="elem in lecture" :key="elem.type">
-  <img :src="elem.image" alt="ss" style="width:100%">
-  <h1>  {{ elem.name }}</h1>
-    <p class="title">Name teacher</p>
-    <p>Harvard University</p>
-      <p><button>Contact</button></p>
-</div>
-</div>
+<Search :change="change" :onchange="onchange" :search="search"/>
+<PostLecture/>
+
+  <div class="parent">
+    <div class="Lecture" v-for="elem in this.posts" :key="elem">
+      <img :src="elem.image_post" style="width: 100%" />
+      <h1>{{ elem.title }}</h1>
+      <a href="/Profil" @click="savePerson(elem.id_user)">{{ elem.firstName }} {{ elem.lastName }}</a>
+      <p>{{ elem.description }}</p>
+      <h3>{{ elem.label_type }}</h3>
+      <img style="width: 10%" :src="elem.image_type" />
+
+      <p>
+        <button>Contact</button>
+      </p>
+    </div>
+  </div>
 </template>
 <style scoped>
-
-
 .Lecture {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   max-width: 300px;
@@ -65,17 +93,16 @@ export default{
   font-family: arial;
   align-items: start;
   align-self: start;
-  
-  
 }
 .parent {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-grid-template-rows: repeat(2, 1fr);
-grid-column-gap: 3px;
-grid-row-gap: 0px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 3px;
+  grid-row-gap: 0px;
+  left: 7cm;
+  position: absolute;
 }
-
 
 .title {
   color: grey;
@@ -101,7 +128,8 @@ a {
   color: black;
 }
 
-button:hover, a:hover {
+button:hover,
+a:hover {
   opacity: 0.7;
 }
 </style>
