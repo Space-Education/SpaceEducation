@@ -137,12 +137,8 @@ var updateUserCategory = function (req, res) {
   option=req.body.id_category
   sql = "UPDATE users SET id_category = ? WHERE id_user =? "
   db.query(sql, [option,params], (err, items, fields) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.status(200).send(items);
     }
-  });
+  );
 };
 //insert data user for the signup
 var insertUser = function (req, res) {
@@ -150,10 +146,8 @@ var insertUser = function (req, res) {
   var params = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
-    email: req.body.email,
     password: req.body.password,
     phone: req.body.phone,
-    dob: req.body.dob,
     id_category: req.body.id_category,
     image_user: req.body.image_user,
     active: false
