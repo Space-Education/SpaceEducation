@@ -1,214 +1,89 @@
 
 <script>
-// import App from "../App.vue"
-import axios from 'axios';
+
+import axios from "axios";
 export default {
-    
-    data() {
-        return {
-            title: "",
-            description: "",
-            datatype:JSON.parse(localStorage.getItem('type')),
-            id_type:null,
-            url: 'http://localhost:3001/api/items/getdata'
-        }
-
+  components: {},
+  data() {
+    return {
+      title: "",
+      description: "",
+      datatype: [],
+      user: JSON.parse(localStorage.getItem("user")),
+      id_type: null,
+      // url: 'http://localhost:3001/api/items/getdata'
+    };
+  },
+  mounted() {
+    axios.get("http://localhost:3001/api/items/type").then((response) => {
+      this.datatype = response.data;
+      console.log(this.datatype);
+      // localStorage.setItem("type", JSON.stringify(this.type));
+    });
+  },
+  methods: {
+    change(event) {
+      this[event.target.name] = event.target.value;
+      console.log(this[event.target.name]);
     },
-    methods: {
-
-
-        change(event) {
-            this.title = event.target.value
-            console.log(this.datatype)
-        },
-        change1(event) {
-            this.id_type = event.target.value
-            console.log(this.id_type)
-        },
-        change2(event) {
-            this.description = event.target.value
-            console.log(this.description)
-        },
-        add() {
-            var option = {
-                id_type: this.id_type,
-                title: this.title,
-                description: this.description
-            }
-            console.log(option)
-            axios.post('http://localhost:3001/api/items/lecture', option).then((response) => {
-                console.log(response)
-                
-            }).catch((error) => {
-                console.log(error)
-            })
-        }
-
-    }
-}
-
-
+    add() {
+      var option = {
+        title: this.title,
+        description: this.description,
+        image_post: this.image_post,
+        id_type: this.id_type,
+        id_user: this.user.id_user,
+      };
+      console.log(option);
+      axios
+        .post("http://localhost:3001/api/items/posts", option)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
+};
 </script>
 
 
 <template>
-    <!-- <div>
-        <h1>Title</h1>
-        <input :value="title" @input="change" />
-        <h1>type of The Lecture</h1>
-        <select @input="change1">
-            
-            <option  value="">select type of lecture</option>
-            
-            <option v-for="elem in this.datatype" :key="elem" :value="elem.id_type"  >{{ elem.label }}</option>
-            
-        </select>
-
-        <h1>description</h1>
-        <input @input="change2" />
-
-        <button v-on:click="add()">Submit</button>
-    </div> -->
-      <div class="login-root">
-    <div
-      class="box-root flex-flex flex-direction--column"
-      style="min-height: 100vh; flex-grow: 1"
-    >
-      <div class="loginbackground box-background--white padding-top--64">
-        <div class="loginbackground-gridContainer">
-          <div
-            class="box-root flex-flex"
-            style="grid-area: top / start / 8 / end"
-          >
-            <div
-              class="box-root"
-              style="
-                background-image: linear-gradient(
-                  white 0%,
-                  rgb(247, 250, 252) 33%
-                );
-                flex-grow: 1;
-              "
-            ></div>
-          </div>
-          <div class="box-root flex-flex" style="grid-area: 4 / 2 / auto / 5">
-            <div
-              class="
-                box-root
-                box-divider--light-all-2
-                animationLeftRight
-                tans3s
-              "
-              style="flex-grow: 1"
-            ></div>
-          </div>
-          <div
-            class="box-root flex-flex"
-            style="grid-area: 6 / start / auto / 2"
-          >
-            <div
-              class="box-root box-background--blue800"
-              style="flex-grow: 1"
-            ></div>
-          </div>
-          <div
-            class="box-root flex-flex"
-            style="grid-area: 7 / start / auto / 4"
-          >
-            <div
-              class="box-root box-background--blue animationLeftRight"
-              style="flex-grow: 1"
-            ></div>
-          </div>
-          <div class="box-root flex-flex" style="grid-area: 8 / 4 / auto / 6">
-            <div
-              class="box-root box-background--gray100 animationLeftRight tans3s"
-              style="flex-grow: 1"
-            ></div>
-          </div>
-          <div
-            class="box-root flex-flex"
-            style="grid-area: 2 / 15 / auto / end"
-          >
-            <div
-              class="box-root box-background--cyan200 animationRightLeft tans4s"
-              style="flex-grow: 1"
-            ></div>
-          </div>
-          <div
-            class="box-root flex-flex"
-            style="grid-area: 3 / 14 / auto / end"
-          >
-            <div
-              class="box-root box-background--blue animationRightLeft"
-              style="flex-grow: 1"
-            ></div>
-          </div>
-          <div class="box-root flex-flex" style="grid-area: 4 / 17 / auto / 20">
-            <div
-              class="box-root box-background--gray100 animationRightLeft tans4s"
-              style="flex-grow: 1"
-            ></div>
-          </div>
-          <div class="box-root flex-flex" style="grid-area: 5 / 14 / auto / 17">
-            <div
-              class="
-                box-root
-                box-divider--light-all-2
-                animationRightLeft
-                tans3s
-              "
-              style="flex-grow: 1"
-            ></div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="box-root padding-top--24 flex-flex flex-direction--column"
-        style="flex-grow: 1; z-index: 9"
-      >
-        <div
-          class="
-            box-root
-            padding-top--48
-            padding-bottom--24
-            flex-flex
-            flex-justifyContent--center
-          "
-        >
-          <h1>
-            <a rel="dofollow">Add a lecture</a
-            >
-          </h1>
-        </div>
-        <div class="formbg-outer">
+ 
+  
+        
           <div class="formbg">
             <div class="formbg-inner padding-horizontal--48">
               <span class="padding-bottom--15">Add a lecture</span>
-                <div class="field padding-bottom--24">
-                  <label for="text">Title of the lecture:</label>
-                  <input type="text" name="text" :value="title" @input="change"/>
-                </div>
-                <div class="field padding-bottom--24">
-                  <label for="text">Link of the image:</label>
-                  <input type="text" name="text" :value="image" @input="change1" />
-                </div>
-                <div class="field padding-bottom--24">
-                  <div class="grid--50-50">
-                    <label for="text">description</label>
-                  </div>
-                  <input type="text" name="text" :value="description" @input="change2" />
-                </div>
-                <div class="field padding-bottom--24">
-                  <input type="submit" v-on:click="add()" />
-                </div>
-            
+              <!-- <form id="stripe-login"> -->
+              <div class="field padding-bottom--24">
+                <label>Title</label>
+                <input name="title" :value="title" @input="change" />
+                
+                <label>description</label>
+                <input name="description" @input="change2" />
+                <label>type of The Lecture</label>
+                <select name="id_type" @input="change">
+                  <option value="">select type of lecture</option>
+
+                  <option
+                    v-for="elem in this.datatype"
+                    :key="elem"
+                    :value="elem.id_type"
+                  >
+                    {{ elem.label_type }}
+                  </option>
+                </select>
+
+                <label>image</label>
+                <input name="image_post" type="text" @input="change"/>
+                <button v-on:click="add()">Submit</button>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
+       
+   
 </template>
 
 <style>
@@ -270,9 +145,9 @@ a {
 .box-background--blue {
   background-color: #5469d4;
 }
-.box-background--white {
+/* .box-background--white {
   background-color: #ffffff;
-}
+} */
 .box-background--blue800 {
   background-color: #212d63;
 }
@@ -309,7 +184,7 @@ a {
 .formbg {
   margin: 0px auto;
   width: 100%;
-  max-width: 448px;
+  max-width: 800px;
   background: white;
   border-radius: 4px;
   box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px,
@@ -426,5 +301,4 @@ a.ssolink {
     transform: translateX(0px);
   }
 }
-
 </style>

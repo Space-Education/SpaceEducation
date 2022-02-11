@@ -3,8 +3,10 @@ import Home from './App.vue'
 import Feed from './components/Feed.vue'
 import PostLecture from './components/PostLecture.vue'
 import Signup from './components/Signup.vue'
-import Signin from './components/Signin.vue'
+import Login from './components/Login.vue'
 import AboutUs from './components/AboutUs.vue'
+import Payment from "./components/Payment.vue"
+import Profil from "./components/ProfilUser.vue"
 
 const routes = [
 	// {
@@ -13,7 +15,7 @@ const routes = [
 	// 	component: Home,
 	// },
     {
-        path: '/Feed',
+        path: '/',
         name: 'Feed',
         component: Feed
     },
@@ -23,9 +25,9 @@ const routes = [
         component: PostLecture
     },
 	{
-        path: '/Signin',
-        name: 'Signin',
-        component: Signin
+        path: '/Login',
+        name: 'Login',
+        component: Login
     },
 	{
         path: '/Signup',
@@ -41,6 +43,16 @@ const routes = [
         path: '/AboutUs',
         name: 'AboutUs',
         component: AboutUs
+    },
+    {
+        path:"/Payment",
+        name:'Payment',
+        component:Payment
+    },
+    {
+        path:"/Profil",
+        name:'Profil',
+        component:Profil
     },
 ];
 
