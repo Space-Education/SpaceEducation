@@ -140,7 +140,6 @@ var updateUserCategory = function (req, res) {
     }
   );
 };
-
 //insert data user for the signup
 var insertUser = function (req, res) {
   var sql = "INSERT INTO users SET ?"
