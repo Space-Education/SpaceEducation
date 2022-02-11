@@ -6,9 +6,13 @@ export default {
   data() {
     return {
       datatype: [],
+<<<<<<< HEAD
       key:0,
       user:{}
 
+=======
+      key:0
+>>>>>>> 7df493fcdf377eba6e1fa2c8f7c4b3cc87a6a1df
     };
   },
   mounted() {
@@ -16,12 +20,23 @@ export default {
       this.datatype = response.data;
       console.log(this.datatype);
     });
+<<<<<<< HEAD
    
+=======
+>>>>>>> 7df493fcdf377eba6e1fa2c8f7c4b3cc87a6a1df
   },
   methods: {
     changeKey(){
       localStorage.setItem('key',this.key)
       location.reload();
+<<<<<<< HEAD
+=======
+    },
+    logout(){
+      localStorage.removeItem("user")
+      localStorage.setItem('key',this.key)
+      localStorage.removeItem('profil')
+>>>>>>> 7df493fcdf377eba6e1fa2c8f7c4b3cc87a6a1df
     }
   }
 };
@@ -53,6 +68,12 @@ export default {
         <li>
           <a @click="changeKey"> <router-link to="/Profil"> Profil </router-link> </a>
         </li>
+<<<<<<< HEAD
+=======
+        <li>
+          <a @click="logout"> <router-link to="/"> Logout </router-link> </a>
+        </li>
+>>>>>>> 7df493fcdf377eba6e1fa2c8f7c4b3cc87a6a1df
       </div>
     </ul>
   </div>
