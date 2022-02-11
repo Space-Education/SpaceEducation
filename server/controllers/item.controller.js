@@ -10,10 +10,22 @@ var selectAllPosts = function (req, res) {
     }
   });
 };
+// select all posts for home page by id type
+var selectAllPostsByIdType = function (req, res) {
+  var params=req.params.id_type
+  var sql = "SELECT p.*, t.label_type, t.image_type, u.firstName ,u.lastName FROM ((posts p inner join type t on t.id_type = p.id_type) inner join users u on u.id_user=p.id_user) where p.id_type=?"
+  db.query(sql,params,(err, items, fields) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(items);
+    }
+  });
+};
 //select all post of user for profil page
 var selectAllPostsUser = function (req, res) {
   var params = req.params.id
-  var sql = "SELECT p.*, t.label, t.image_type FROM (posts p inner join type t on t.id_type = p.id_type) where id_user=?"
+  var sql = "SELECT p.*, t.label_type, t.image_type FROM (posts p inner join type t on t.id_type = p.id_type) where id_user=?"
   db.query(sql, [params], (err, items, fields) => {
     if (err) {
       res.status(500).send(err);
@@ -97,6 +109,19 @@ var selectUser = function (req, res) {
     }
   });
 };
+//select data user for the profile
+var selectProfile = function (req, res) {
+  var params=req.params.id
+  
+  sql = "SELECT firstName,lastName,dob,phone,email,image_user FROM users WHERE id_user = ?"
+  db.query(sql, [params], (err, items, fields) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(items);
+    }
+  });
+};
 //insert data user for the signup
 var insertUser = function (req, res) {
   var sql = "INSERT INTO users SET ?"
@@ -120,4 +145,4 @@ var insertUser = function (req, res) {
   });
 };
 
-module.exports = { selectCategory, selectAllPosts, insertPost, selectTypes, insertType, insertUser, selectUser, selectAllPostsUser, insertCategory };
+module.exports = { selectProfile,selectAllPostsByIdType,selectCategory, selectAllPosts, insertPost, selectTypes, insertType, insertUser, selectUser, selectAllPostsUser, insertCategory };
