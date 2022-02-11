@@ -89,7 +89,7 @@ export default {
 } */
 .center {
   position: absolute;
-  left: 1450px;
+  right: 0px;
 }
 .centerReste {
   position: left;

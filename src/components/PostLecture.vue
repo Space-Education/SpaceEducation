@@ -1,6 +1,5 @@
 
 <script>
-
 import axios from "axios";
 export default {
   components: {},
@@ -50,13 +49,67 @@ export default {
 
 
 <template>
- 
-  
-        
-          <div class="formbg">
-            <div class="formbg-inner padding-horizontal--48">
-              <span class="padding-bottom--15">Add a lecture</span>
-              <!-- <form id="stripe-login"> -->
+<br>
+  <div class="formbg">
+    <div class="formbg-inner padding-horizontal--48">
+      <h3>Post a lecture:</h3>
+      <div class="row">
+        <div class="col">
+          <!-- Name input -->
+          <div class="form-outline">
+            <label class="form-label" for="form8Example1">Title:</label>
+            <input type="text" id="form8Example1" class="form-control" />
+          </div>
+        </div>
+        <div class="col">
+          <!-- Email input -->
+          <div class="form-outline">
+            <label class="form-label" for="form8Example2">Description:</label>
+            <input type="email" id="form8Example2" class="form-control" />
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="col">
+          <!-- Name input -->
+          <div class="form-outline">
+            <label class="form-label" for="form8Example2"
+              >select the categorie:</label
+            >
+
+            <select class="form-select" aria-label="Default select example" name="id_type" @input="change">
+              <option value="">select type of lecture</option>
+
+              <option
+                v-for="elem in this.datatype"
+                :key="elem"
+                :value="elem.id_type"
+              >
+                {{ elem.label_type }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col">
+          <!-- Name input -->
+          <div class="form-outline">
+            <label class="form-label" for="form8Example4">Image:</label>
+            <input type="text" id="form8Example4" class="form-control" />
+          </div>
+        </div>
+        <div class="col">
+          <!-- Email input -->
+          <div class="form-outline">
+                    <label class="form-label" for="form8Example4">Click to submit:</label>
+    
+                <button class="btn btn-primary btn-block mb-4" v-on:click="add()">Submit</button>
+          </div>
+        </div>
+      </div>
+      <!-- <span class="padding-bottom--15">Add a lecture</span>
               <div class="field padding-bottom--24">
                 <label>Title</label>
                 <input name="title" :value="title" @input="change" />
@@ -78,12 +131,12 @@ export default {
 
                 <label>image</label>
                 <input name="image_post" type="text" @input="change"/>
-                <button v-on:click="add()">Submit</button>
-              </div>
-            </div>
-          </div>
-       
-   
+                <br>
+                <br>
+                <button class="btn btn-primary btn-block mb-4" v-on:click="add()">Submit</button>
+              </div> -->
+    </div>
+  </div>
 </template>
 
 <style>
