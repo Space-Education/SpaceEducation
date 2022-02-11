@@ -23,6 +23,7 @@ export default {
         .then((response) => {
           console.log(response);
           localStorage.setItem("user", JSON.stringify(response.data[0]));
+          location.reload();
         })
         .catch((error) => {
           console.log(error);
