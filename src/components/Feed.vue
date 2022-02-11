@@ -3,11 +3,7 @@ import axios from "axios";
 import NavBar from './NavBar.vue'
 import PostLecture from "./PostLecture.vue"
 import Search from "./Serach.vue"
-<<<<<<< HEAD
-import ProfilUser from "./ProfilUser.vue"
-=======
 
->>>>>>> 7df493fcdf377eba6e1fa2c8f7c4b3cc87a6a1df
 export default {
   
   components: {
