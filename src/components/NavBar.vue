@@ -6,7 +6,9 @@ export default {
   data() {
     return {
       datatype: [],
-      key:0
+      key:0,
+      user:{}
+
     };
   },
   mounted() {
@@ -14,6 +16,7 @@ export default {
       this.datatype = response.data;
       console.log(this.datatype);
     });
+   
   },
   methods: {
     changeKey(){
