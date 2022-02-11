@@ -27,7 +27,6 @@ export default {
 };
 </script>
 <template>
-<br>
   <!-- <div class=search>
     <label>categories</label>
     <select name="id_type" @input="change">
@@ -41,7 +40,7 @@ export default {
     <input type="text" @input="onchange" name="search" />
     <button @click="search">Search</button>
   </div>
-  <br><br> -->
+  <br><br> --> -->
   <!-- new -->
   <div class="formbg">
     <div class="formbg-inner padding-horizontal--48">

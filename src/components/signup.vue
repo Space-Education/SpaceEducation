@@ -30,7 +30,7 @@ export default {
                 password: this.password,
                 phone: this.phone,
                 dob: this.dob,
-                id_category:2,
+                id_category:3,
                 image_user:this.image_user
             }
             console.log(option)
@@ -38,6 +38,7 @@ export default {
                 .then((response) => {
                     console.log(response)
                     localStorage.setItem('user', JSON.stringify(option))
+                    location.reload();
 
                 }).catch((error) => {
                     console.log(error)

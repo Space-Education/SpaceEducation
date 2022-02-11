@@ -6,7 +6,10 @@ export default {
   data() {
     return {
       datatype: [],
-      key:0
+      key:0,
+      user:{},
+      id_category:0
+      
     };
   },
   mounted() {
@@ -14,6 +17,12 @@ export default {
       this.datatype = response.data;
       console.log(this.datatype);
     });
+    this.user=JSON.parse(localStorage.getItem('user'))
+    console.log(this.user)
+    if(this.user!==null){
+      this.id_category=this.user.id_category
+      this.index=1
+    }
   },
   methods: {
     changeKey(){
@@ -24,6 +33,7 @@ export default {
       localStorage.removeItem("user")
       localStorage.setItem('key',this.key)
       localStorage.removeItem('profil')
+      location.reload();
     }
   }
 };
@@ -36,27 +46,34 @@ export default {
           <a> <router-link to="/"> Home </router-link> </a>
         </li>
         <li>
-          <a> <router-link to="/Post"> Post </router-link> </a>
-        </li>
-        <li>
           <a> <router-link to="/AboutUs"> AboutUs </router-link> </a>
         </li>
         <li>
+          <a> <router-link v-if="this.id_category!==0&&this.id_category !==3 "  to="/Post" > Post </router-link> </a>
+        </li>
+        
+        <!-- <li>
           <a> <router-link to="/Payment"> Payment </router-link> </a>
+        </li> -->
+        <li>
+          <a> <router-link v-if="this.id_category===1" to="/ListUser"> List User </router-link> </a>
+        </li>
+        <li>
+          <a> <router-link v-if="this.id_category===1" to="/AddType"> Add Type </router-link> </a>
         </li>
       </div>
       <div className="center">
         <li>
-          <a> <router-link to="/Login"> Login </router-link> </a>
+          <a> <router-link v-if="this.id_category===0" to="/Login"> Login </router-link> </a>
         </li>
         <li>
-          <a> <router-link to="/Signup"> Signup </router-link> </a>
+          <a> <router-link v-if="this.id_category===0" to="/Signup"> Signup </router-link> </a>
         </li>
         <li>
-          <a @click="changeKey"> <router-link to="/Profil"> Profil </router-link> </a>
+          <a @click="changeKey"> <router-link v-if="this.id_category!==0" to="/Profil"> Profil </router-link> </a>
         </li>
         <li>
-          <a @click="logout"> <router-link to="/"> Logout </router-link> </a>
+          <a @click="logout"> <router-link v-if="this.id_category!==0" to="/"> Logout </router-link> </a>
         </li>
       </div>
     </ul>

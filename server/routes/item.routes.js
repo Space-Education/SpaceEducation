@@ -2,6 +2,7 @@ const router = require('express').Router();
 const itemController = require("../controllers/item.controller");
 
 // for type
+router.route('/type').get(itemController.selectTypes).post(itemController.insertType)
 router.get("/type", itemController.selectTypes);
 router.post("/type", itemController.insertType);
 
@@ -11,8 +12,11 @@ router.get("/category", itemController.selectCategory);
 
 // for user
 router.post("/user", itemController.insertUser);
-router.post("/userlogin", itemController.selectUser);
+router.post("/userlogin", itemController.selectUser);//for login
+router.get("/userall", itemController.selectAllUsers)// for change category of user
 router.get("/user/:id", itemController.selectProfile);// for profile
+router.put("/user/:id", itemController.updateUserCategory);// for change category
+
 
 // for post
 router.get("/homePosts", itemController.selectAllPosts);
