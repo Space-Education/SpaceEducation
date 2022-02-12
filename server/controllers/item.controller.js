@@ -34,7 +34,9 @@ var selectAllPostsUser = function (req, res) {
     }
   });
 };
+
 // insert post 
+
 var insertPost = function (req, res) {
   var lecture = "INSERT INTO posts SET ?"
   var params = {
@@ -137,8 +139,12 @@ var updateUserCategory = function (req, res) {
   option=req.body.id_category
   sql = "UPDATE users SET id_category = ? WHERE id_user =? "
   db.query(sql, [option,params], (err, items, fields) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(items);
     }
-  );
+  });
 };
 //insert data user for the signup
 var insertUser = function (req, res) {
@@ -160,5 +166,32 @@ var insertUser = function (req, res) {
     }
   });
 };
+// insert booking
+var insertBooking =function (req, res) {
+  var sql = "INSERT INTO booking SET ?"
+  var params = {
+    id_user: req.body.id_user,
+    id_post: req.body.id_post,
+  }
+  db.query(sql, params, (err, results) => {
+    if (err) {
+      console.log(err)
+    } else {
+      res.send(results)
+    }
+  });
+};
+// select booking for one user
+var selectBooking=function (req, res) {
+  var params = req.params.id
+  sql = "SELECT b.*, u.firstName,u.lastName ,p.title ,p.description , p.image_post from booking b inner join users u on b.id_user=u.id_user inner join posts p on b.id_post =p.id_post where b.id_user=?"
+  db.query(sql,params, (err, items, fields) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(items);
+    }
+  });
+};
 
-module.exports = { updateUserCategory,selectAllUsers, selectProfile, selectAllPostsByIdType, selectCategory, selectAllPosts, insertPost, selectTypes, insertType, insertUser, selectUser, selectAllPostsUser, insertCategory };
+module.exports = {selectBooking,insertBooking, updateUserCategory,selectAllUsers, selectProfile, selectAllPostsByIdType, selectCategory, selectAllPosts, insertPost, selectTypes, insertType, insertUser, selectUser, selectAllPostsUser, insertCategory };
