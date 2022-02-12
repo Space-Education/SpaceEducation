@@ -34,7 +34,9 @@ var selectAllPostsUser = function (req, res) {
     }
   });
 };
+
 // insert post 
+
 var insertPost = function (req, res) {
   var lecture = "INSERT INTO posts SET ?"
   var params = {
@@ -144,17 +146,14 @@ var updateUserCategory = function (req, res) {
     }
   });
 };
-
 //insert data user for the signup
 var insertUser = function (req, res) {
   var sql = "INSERT INTO users SET ?"
   var params = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
-    email: req.body.email,
     password: req.body.password,
     phone: req.body.phone,
-    dob: req.body.dob,
     id_category: req.body.id_category,
     image_user: req.body.image_user,
     active: false

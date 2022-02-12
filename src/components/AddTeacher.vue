@@ -39,8 +39,8 @@ export default {
       axios
         .put(`http://localhost:3001/api/items/user/${this.id_user}`, option)
         .then((response) => {
-          console.log(response);
           location.reload();
+          console.log(response);
           
         })
         .catch((error) => {

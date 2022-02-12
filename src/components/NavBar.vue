@@ -80,17 +80,7 @@ export default {
   </div>
   <router-view />
 
-  <div>
-    <div class="sidenav">
-      <div class="plus">
-        <i><font-awesome-icon icon="fa-solid fa-plus" /></i>
-        <h1>Post new lecture </h1>
-      </div>
-      <div v-for="elem in this.datatype" :key="elem">
-        <a :value="elem.id_type" @click="change(elem.id_type)">{{elem.label_type}}</a>
-      </div>
-    </div>
-  </div>
+
 </template>
 
 <style>
@@ -99,7 +89,7 @@ export default {
 } */
 .center {
   position: absolute;
-  left: 1450px;
+  right: 0px;
 }
 .centerReste {
   position: left;
