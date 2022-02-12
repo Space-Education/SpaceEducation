@@ -108,21 +108,21 @@ export default {
           <div class="carousel-inner">
             <div class="carousel-item active">
               <img
-                src="https://media.discordapp.net/attachments/940527646540972052/941883127448625162/carrouselle.jpg"
+                src="https://media.discordapp.net/attachments/940527989765046312/941934461807886406/carrouselle.jpg"
                 class="d-block w-100"
                 alt="..."
               />
             </div>
             <div class="carousel-item">
               <img
-                src="https://www.ei-ie.org/img/Future-of-work-in-education.jpg?p=card"
+                src="https://media.discordapp.net/attachments/940527989765046312/941934462248304640/carrouselle2.jpg"
                 class="d-block w-100"
                 alt="..."
               />
             </div>
             <div class="carousel-item">
               <img
-                src="https://www.educationcorner.com/images/featured-importance-education.png"
+                src="https://media.discordapp.net/attachments/940527989765046312/941934462726451200/carrouselle3.jpg"
                 class="d-block w-100"
                 alt="..."
               />
@@ -176,7 +176,7 @@ export default {
             <h5 class="card-title">{{ elem.label_type }}</h5>
 
             <div class="text-center my-4">
-              <a href="booking" @click="booking(user.id_user,elem.id_post)" class="btn btn-warning">Contact</a>
+              <a href="Booked" @click="booking(user.id_user,elem.id_post)" class="btn btn-warning">Booking</a>
             </div>
           </div>
         </div>

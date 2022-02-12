@@ -153,6 +153,8 @@ var insertUser = function (req, res) {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     password: req.body.password,
+    email:req.body.email,
+    dob:req.body.dob,
     phone: req.body.phone,
     id_category: req.body.id_category,
     image_user: req.body.image_user,
