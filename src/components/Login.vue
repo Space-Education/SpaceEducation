@@ -23,7 +23,7 @@ export default {
         .then((response) => {
           console.log(response);
           localStorage.setItem("user", JSON.stringify(response.data[0]));
-          location.reload();
+          // location.reload();
         })
         .catch((error) => {
           console.log(error);
@@ -140,13 +140,13 @@ export default {
                 Remember me
               </label>
             </div>
-            <a href="#!" class="text-body">Forgot password?</a>
+          
           </div>
 
           <div class="text-center text-lg-start mt-4 pt-2">
-            <button type="button" class="btn btn-primary btn-lg"
-              style="padding-left: 2.5rem; padding-right: 2.5rem;" v-on:click="add()">Login</button>
-            <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
+           <a href="http://localhost:3000"> <button   type="button" class="btn btn-primary btn-lg"
+              style="padding-left: 2.5rem; padding-right: 2.5rem;" v-on:click="add()">Login  </button></a>
+            <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="http://localhost:3000/Signup"
                 class="link-danger">Register</a></p>
           </div>
 

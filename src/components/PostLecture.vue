@@ -58,14 +58,14 @@ export default {
           <!-- Name input -->
           <div class="form-outline">
             <label class="form-label" for="form8Example1">Title:</label>
-            <input type="text" id="form8Example1" class="form-control" />
+            <input type="text" id="form8Example1" class="form-control" name="title" :value="title" @input="change"/>
           </div>
         </div>
         <div class="col">
           <!-- Email input -->
           <div class="form-outline">
             <label class="form-label" for="form8Example2">Description:</label>
-            <input type="email" id="form8Example2" class="form-control" />
+            <input type="email" id="form8Example2" name="description" @input="change2"  />
           </div>
         </div>
       </div>
@@ -97,7 +97,7 @@ export default {
           <!-- Name input -->
           <div class="form-outline">
             <label class="form-label" for="form8Example4">Image:</label>
-            <input type="text" id="form8Example4" class="form-control" />
+            <input type="text" id="form8Example4" class="form-control" name="image_post"  @input="change" />
           </div>
         </div>
         <div class="col">

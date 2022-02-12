@@ -24,6 +24,10 @@ router.get("/homePosts/:id_type", itemController.selectAllPostsByIdType);
 router.get("/profilPosts/:id", itemController.selectAllPostsUser);// for profile
 router.post("/posts", itemController.insertPost);
 
+// for booking
+router.post("/booking", itemController.insertBooking)
+router.get("/booking/:id", itemController.selectBooking)
+
 
 
 module.exports = router;

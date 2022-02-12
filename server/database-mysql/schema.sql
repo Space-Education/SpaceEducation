@@ -44,6 +44,15 @@ CREATE TABLE posts (
   foreign key (id_user) references users (id_user)
 );
 
+CREATE TABLE booking (
+  id_user int NOT NULL,
+  id_post int NOT NULL,
+  status_booking boolean default false NOT NULL,
+  PRIMARY KEY (id_post,id_user),
+  foreign key (id_post) references posts (id_post),
+  foreign key (id_user) references users (id_user)
+);
+
 /*  Execute this file from the command line by typing:
  *    mysql -u root -p < server/database-mysql/schema.sql
  *  to create the database and the tables.*/

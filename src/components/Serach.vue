@@ -40,7 +40,7 @@ export default {
     <input type="text" @input="onchange" name="search" />
     <button @click="search">Search</button>
   </div>
-  <br><br> --> -->
+  <br><br> --> 
   <!-- new -->
   <div class="formbg">
     <div class="formbg-inner padding-horizontal--48">
@@ -91,7 +91,7 @@ export default {
           <div class="form-outline">
             <label class="form-label" for="form8Example4">Click to :</label>
 
-            <button class="btn btn-primary btn-block mb-4" v-on:click="add()">
+            <button class="btn btn-primary btn-block mb-4" v-on:click="add()" >
               Search
             </button>
           </div>
