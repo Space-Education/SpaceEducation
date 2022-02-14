@@ -10,15 +10,14 @@ export default {
       users: [],
       dataCategory: [],
       user: JSON.parse(localStorage.getItem("user")),
-      booked:[],
       
       // url: 'http://localhost:3001/api/items/getdata'
     };
   },
   mounted() {
-    axios.get(`http://localhost:3001/api/items/booking/${this.user.id_user}`).then((response) => {
-      this.booked = response.data;
-      console.log(this.booked);
+    axios.get("http://localhost:3001/api/items/userall").then((response) => {
+      this.users = response.data;
+      console.log(this.users);
       // localStorage.setItem("type", JSON.stringify(this.type));
     });
     axios.get("http://localhost:3001/api/items/category").then((res) => {
@@ -60,22 +59,24 @@ export default {
       <!-- <form id="stripe-login"> -->
       <div class="field padding-bottom--24">
         <table>
-          <td><h5>title</h5></td>
-          <td><h5>Teacher</h5></td>
-          <td><h5>description</h5></td>
+          <td><h5>ID User</h5></td>
+          <td><h5>First Name</h5></td>
+          <td><h5>Last Name</h5></td>
+          <td><h5>Email</h5></td>
+          <td><h5>Category</h5></td>
           <td><h5>Picture</h5></td>
-          <td><h5>status</h5></td>
-          <td><h5>join room</h5></td>
-          <tr v-for="elem in this.booked" :key="elem">
-            <td>{{ elem.title }}</td>
-            <td>{{ elem.firstName }} {{ elem.lastName }}</td>
-            <td>{{ elem.description }}</td>
-            <td><img class="img" :src="elem.image_post" alt="" /></td>
-            <td>{{ elem.status_booking }}</td>
-            <td><a href="http://localhost:8080/">join</a></td>
+          <td><h5>Phone Number</h5></td>
+          <tr v-for="elem in this.users" :key="elem">
+            <td>{{ elem.id_user }}</td>
+            <td>{{ elem.firstName }}</td>
+            <td>{{ elem.lastName }}</td>
+            <td>{{ elem.email }}</td>
+            <td>{{ elem.label_category }}</td>
+            <td><img class="img" :src="elem.image_user" alt="" /></td>
+            <td>{{ elem.phone }}</td>
           </tr>
         </table>
-        <!-- <hr />
+        <hr />
         <h4>change category of User</h4>
         <div class="flex-flex">
           <label>Users</label>
@@ -103,7 +104,7 @@ export default {
             </option>
           </select>
           <button v-on:click="add()">Submit</button>
-        </div> -->
+        </div>
 
         
       </div>
