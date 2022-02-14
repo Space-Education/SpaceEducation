@@ -18,9 +18,11 @@ export default {
       index: '',
       value: '',
       profil: {},
+      user:{},
     };
   },
   mounted() {
+    this.user=JSON.parse(localStorage.getItem('user'))
     axios.get("http://localhost:3001/api/items/homePosts").then((response) => {
       this.posts = response.data;
       this.allposts = response.data
@@ -30,6 +32,14 @@ export default {
     });
   },
   methods: {
+    booking(id1,id2){
+      var option={
+        id_user:id1,
+        id_post:id2
+      }
+      axios.post("http://localhost:3001/api/items/booking",option)
+    },
+    
     change(e) {
       this.index = e.target.value
       console.log(this.index);
@@ -44,10 +54,12 @@ export default {
       console.log(this.value);
     },
     search() {
+     
       var newArray = []
       this.posts = []
       for (var i = 0; i < this.allposts.length; i++) {
         if (this.allposts[i].firstName.includes(this.value) || this.allposts[i].label_type.includes(this.value) || this.allposts[i].lastName.includes(this.value)) {
+          console.log(this.allposts[i]) 
           newArray.push(this.allposts[i])
         }
       }
@@ -67,6 +79,8 @@ export default {
 </script>
 
 <template>
+<br> <br>
+        <Search :change="change" :onchange="onchange" :search="search" />
   <div class="container">
     <div class="row mt-5 mb-5">
       <div class="col-sm-12">
@@ -96,21 +110,21 @@ export default {
           <div class="carousel-inner">
             <div class="carousel-item active">
               <img
-                src="https://smtcenter.net/wp-content/uploads/2019/09/systemic-evaluation.jpg"
+                src="https://media.discordapp.net/attachments/940527989765046312/941934461807886406/carrouselle.jpg"
                 class="d-block w-100"
                 alt="..."
               />
             </div>
             <div class="carousel-item">
               <img
-                src="https://www.ei-ie.org/img/Future-of-work-in-education.jpg?p=card"
+                src="https://media.discordapp.net/attachments/940527989765046312/941934462248304640/carrouselle2.jpg"
                 class="d-block w-100"
                 alt="..."
               />
             </div>
             <div class="carousel-item">
               <img
-                src="https://www.educationcorner.com/images/featured-importance-education.png"
+                src="https://media.discordapp.net/attachments/940527989765046312/941934462726451200/carrouselle3.jpg"
                 class="d-block w-100"
                 alt="..."
               />
@@ -128,7 +142,6 @@ export default {
       </div>
     </div>
   </div>
-  <Search :change="change" :onchange="onchange" :search="search" />
   <!-- <div class="parent">
     <div class="Lecture" v-for="elem in this.posts" :key="elem">
       <img :src="elem.image_post" style="width: 100%" />
@@ -150,12 +163,12 @@ export default {
           <img :src="elem.image_post" style="width: 100%" class="card-img-top" />
           <div class="card-body text-center my-4">
             <div class="clearfix mb-3">
-              <span class="float-start badge rounded-pill bg-primary">{{ elem.title }}</span>
-              <span class="float-end price-hp">
-                <a
+              <span class="float-start badge rounded-pill bg-primary price-hp"> <a
                   href="/Profil"
                   @click="savePerson(elem.id_user)"
-                >{{ elem.firstName }} {{ elem.lastName }}</a>
+                >{{ elem.firstName }} {{ elem.lastName }}</a></span>
+              <span class="float-end ">
+                {{ elem.title }}
               </span>
             </div>
             <!-- <h5 class="card-title">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam quidem eaque ut eveniet aut quis rerum. Asperiores accusamus harum ducimus velit odit ut. Saepe, iste optio laudantium sed aliquam sequi.</h5> -->
@@ -165,7 +178,7 @@ export default {
             <h5 class="card-title">{{ elem.label_type }}</h5>
 
             <div class="text-center my-4">
-              <a href="#" class="btn btn-warning">Contact</a>
+              <a href="Booked" @click="booking(user.id_user,elem.id_post)" class="btn btn-warning">Booking</a>
             </div>
           </div>
         </div>

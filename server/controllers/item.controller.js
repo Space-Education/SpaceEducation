@@ -153,6 +153,8 @@ var insertUser = function (req, res) {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     password: req.body.password,
+    email:req.body.email,
+    dob:req.body.dob,
     phone: req.body.phone,
     id_category: req.body.id_category,
     image_user: req.body.image_user,
@@ -166,5 +168,32 @@ var insertUser = function (req, res) {
     }
   });
 };
+// insert booking
+var insertBooking =function (req, res) {
+  var sql = "INSERT INTO booking SET ?"
+  var params = {
+    id_user: req.body.id_user,
+    id_post: req.body.id_post,
+  }
+  db.query(sql, params, (err, results) => {
+    if (err) {
+      console.log(err)
+    } else {
+      res.send(results)
+    }
+  });
+};
+// select booking for one user
+var selectBooking=function (req, res) {
+  var params = req.params.id
+  sql = "SELECT b.*, u.firstName,u.lastName ,p.title ,p.description , p.image_post from booking b inner join users u on b.id_user=u.id_user inner join posts p on b.id_post =p.id_post where b.id_user=?"
+  db.query(sql,params, (err, items, fields) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(items);
+    }
+  });
+};
 
-module.exports = { updateUserCategory,selectAllUsers, selectProfile, selectAllPostsByIdType, selectCategory, selectAllPosts, insertPost, selectTypes, insertType, insertUser, selectUser, selectAllPostsUser, insertCategory };
+module.exports = {selectBooking,insertBooking, updateUserCategory,selectAllUsers, selectProfile, selectAllPostsByIdType, selectCategory, selectAllPosts, insertPost, selectTypes, insertType, insertUser, selectUser, selectAllPostsUser, insertCategory };

@@ -43,10 +43,19 @@ export default {
     <ul>
       <div className="centerReste">
         <li>
+          <router-link to="/"> <img src="https://media.discordapp.net/attachments/940527646540972052/941874057379455006/spaceeducationblanc.png?width=1313&height=671" alt="" class="img"> </router-link>
+        </li>
+        <li>
           <a> <router-link to="/"> Home </router-link> </a>
         </li>
         <li>
           <a> <router-link to="/AboutUs"> AboutUs </router-link> </a>
+        </li>
+        <li>
+          <a> <router-link to="/Booked" v-if="this.id_category!==0" > Booked </router-link> </a>
+        </li>
+        <li>
+          <a> <router-link to="/Lectures" v-if="this.id_category!==0&&this.id_category !==3 " > Lectures </router-link> </a>
         </li>
         <li>
           <a> <router-link v-if="this.id_category!==0&&this.id_category !==3 "  to="/Post" > Post </router-link> </a>
@@ -87,6 +96,10 @@ export default {
 /* body {
   font-size: 28px;
 } */
+.img{
+  max: 100%;
+  width: auto;
+}
 .center {
   position: absolute;
   right: 0px;
@@ -105,7 +118,9 @@ ul {
   position: sticky;
   top: 0;
 }
-
+a:hover {
+    color: #ffffff;
+}
 li {
   float: left;
 }
@@ -119,7 +134,7 @@ li a {
 }
 
 li a:hover {
-  background-color: rgb(67, 33, 146);
+  background-color: rgb(78, 50, 179);
 }
 
 .sidenav {

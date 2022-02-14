@@ -1,6 +1,7 @@
 
 <script>
 import axios from "axios";
+import FormData from "form-data";
 export default {
   components: {},
   data() {
@@ -21,6 +22,21 @@ export default {
     });
   },
   methods: {
+    changefile(e) {
+      let image = e.target.files[0];
+      console.log(image);
+
+      const formData = new FormData();
+      formData.append("file", image);
+      formData.append("upload_preset", "nt1uphup");
+
+      axios
+        .post("http://api.cloudinary.com/v1_1/magico/image/upload", formData)
+        .then((result) => {
+          console.log(result.data.url);
+          this.image_post = result.data.url;
+        });
+    },
     change(event) {
       this[event.target.name] = event.target.value;
       console.log(this[event.target.name]);
@@ -97,7 +113,7 @@ export default {
           <!-- Name input -->
           <div class="form-outline">
             <label class="form-label" for="form8Example4">Image:</label>
-            <input type="text" id="form8Example4" class="form-control" name="image_post"  @input="change" />
+            <input type="file" id="form8Example4" class="form-control" name="image_post"  @input="changefile" />
           </div>
         </div>
         <div class="col">

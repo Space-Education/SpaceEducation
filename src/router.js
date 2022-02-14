@@ -1,5 +1,5 @@
 import { createWebHistory, createRouter } from 'vue-router';
-import Home from './App.vue'
+import Booking from './components/Booking.vue'
 import Feed from './components/Feed.vue'
 import PostLecture from './components/PostLecture.vue'
 import Signup from './components/Signup.vue'
@@ -9,13 +9,14 @@ import Payment from "./components/Payment.vue"
 import Profil from "./components/ProfilUser.vue"
 import AddTeacher from './components/AddTeacher.vue'
 import AddType from './components/AddType.vue'
+import Lectures from './components/Lectures.vue'
 
 const routes = [
-	// {
-	// 	path: '/',
-	// 	name: 'Home',
-	// 	component: Home,
-	// },
+	{
+		path: '/Lectures',
+		name: 'Lectures',
+		component: Lectures,
+	},
     {
         path: '/',
         name: 'Feed',
@@ -66,6 +67,11 @@ const routes = [
         name:'AddType',
         component:AddType
     },
+    {
+        path:"/Booked",
+        name:'Booked',
+        component:Booking
+    }
 ];
 
 const router = createRouter({
