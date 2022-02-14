@@ -21,10 +21,10 @@ CREATE TABLE users (
   id_user int NOT NULL AUTO_INCREMENT,
   firstName varchar(350) NOT NULL,
   lastName varchar(350) NOT NULL,
-  email varchar(350) NOT NULL,
+  email varchar(350) ,
   password varchar(350) NOT NULL,
   phone int(10) NOT NULL,
-  dob varchar (10) NOT NULL,
+  dob varchar (10) ,
   id_category int(10) NOT NULL,
   image_user varchar(900) NOT NULL,
   active boolean NOT NULL,
@@ -41,6 +41,15 @@ CREATE TABLE posts (
   id_user int NOT NULL,
   PRIMARY KEY (id_post),
   foreign key (id_type) references type (id_type),
+  foreign key (id_user) references users (id_user)
+);
+
+CREATE TABLE booking (
+  id_user int NOT NULL,
+  id_post int NOT NULL,
+  status_booking boolean default false NOT NULL,
+  PRIMARY KEY (id_post,id_user),
+  foreign key (id_post) references posts (id_post),
   foreign key (id_user) references users (id_user)
 );
 

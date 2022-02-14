@@ -5,25 +5,19 @@ export default {
   components: {},
   data() {
     return {
-      id_user: null,
-      id_category: null,
-      users: [],
-      dataCategory: [],
+      title: "",
+      description: "",
+      datatype: [],
       user: JSON.parse(localStorage.getItem("user")),
-      booked:[],
-      
+      id_type: null,
       // url: 'http://localhost:3001/api/items/getdata'
     };
   },
   mounted() {
-    axios.get(`http://localhost:3001/api/items/booking/${this.user.id_user}`).then((response) => {
-      this.booked = response.data;
-      console.log(this.booked);
+    axios.get("http://localhost:3001/api/items/type").then((response) => {
+      this.datatype = response.data;
+      console.log(this.datatype);
       // localStorage.setItem("type", JSON.stringify(this.type));
-    });
-    axios.get("http://localhost:3001/api/items/category").then((res) => {
-      this.dataCategory = res.data;
-      console.log(this.dataCategory);
     });
   },
   methods: {
@@ -33,16 +27,15 @@ export default {
     },
     add() {
       var option = {
-        id_category: this.id_category,
-        // id_user: this.id_user,
+        label_type: this.label_type,
+        image_type: this.image_type,
       };
       console.log(option);
       axios
-        .put(`http://localhost:3001/api/items/user/${this.id_user}`, option)
+        .post("http://localhost:3001/api/items/type", option)
         .then((response) => {
-          location.reload();
           console.log(response);
-          
+          location.reload();
         })
         .catch((error) => {
           console.log(error);
@@ -56,56 +49,30 @@ export default {
 <template>
   <div class="formbg">
     <div class="formbg-inner padding-horizontal--48">
-      <span class="padding-bottom--15">Users List </span>
+      <span class="padding-bottom--15">Add New Gategory of lecture</span>
       <!-- <form id="stripe-login"> -->
       <div class="field padding-bottom--24">
         <table>
-          <td><h5>title</h5></td>
-          <td><h5>Teacher</h5></td>
-          <td><h5>description</h5></td>
-          <td><h5>Picture</h5></td>
-          <td><h5>status</h5></td>
-          <td><h5>join room</h5></td>
-          <tr v-for="elem in this.booked" :key="elem">
-            <td>{{ elem.title }}</td>
-            <td>{{ elem.firstName }} {{ elem.lastName }}</td>
-            <td>{{ elem.description }}</td>
-            <td><img class="img" :src="elem.image_post" alt="" /></td>
-            <td>{{ elem.status_booking }}</td>
-            <td><a href="http://localhost:8080/">join</a></td>
+          <td><h5>ID category of lecture</h5></td>
+          <td><h5>Label category of lecture</h5></td>
+          <td><h5>image category of lecture</h5></td>
+
+          <tr v-for="elem in this.datatype" :key="elem">
+            <td>{{ elem.id_type }}</td>
+            <td>{{ elem.label_type }}</td>
+            <td><img class="img" :src="elem.image_type" alt="" /></td>
           </tr>
         </table>
-        <!-- <hr />
-        <h4>change category of User</h4>
-        <div class="flex-flex">
-          <label>Users</label>
-          <select name="id_user" @input="change">
-            <option value="">select User</option>
+        <hr />
+        <div>
+          <label>category label of lecture </label>
+          <input name="label_type" @input="change" />
 
-            <option
-              v-for="elem in this.users"
-              :key="elem"
-              :value="elem.id_user"
-            >
-              {{ elem.firstName }} {{ elem.firstName }}
-            </option>
-          </select>
-          <label>select User</label>
-          <select name="id_category" @input="change">
-            <option value="">select Category</option>
+          <label>image of lecture category</label>
+          <input name="image_type" @input="change" />
 
-            <option
-              v-for="elem in this.dataCategory"
-              :key="elem"
-              :value="elem.id_category"
-            >
-              {{ elem.label_category }}
-            </option>
-          </select>
           <button v-on:click="add()">Submit</button>
-        </div> -->
-
-        
+        </div>
       </div>
     </div>
   </div>
@@ -121,18 +88,7 @@ export default {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     Helvetica Neue, Ubuntu, sans-serif;
 }
-table,
-th,
-td {
-  border: 1px solid black;
-}
-table {
-  width: 100%;
-}
-.img {
-  width: 1cm;
-  height: 1cm;
-}
+
 h1 {
   letter-spacing: -1px;
 }

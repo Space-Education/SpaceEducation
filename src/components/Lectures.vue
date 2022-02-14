@@ -10,15 +10,15 @@ export default {
       users: [],
       dataCategory: [],
       user: JSON.parse(localStorage.getItem("user")),
-      booked:[],
+      posts:[],
       
       // url: 'http://localhost:3001/api/items/getdata'
     };
   },
   mounted() {
-    axios.get(`http://localhost:3001/api/items/booking/${this.user.id_user}`).then((response) => {
-      this.booked = response.data;
-      console.log(this.booked);
+    axios.get(`http://localhost:3001/api/items/profilPosts/${this.user.id_user}`).then((response) => {
+      this.posts = response.data;
+      console.log(this.posts);
       // localStorage.setItem("type", JSON.stringify(this.type));
     });
     axios.get("http://localhost:3001/api/items/category").then((res) => {
@@ -61,18 +61,18 @@ export default {
       <div class="field padding-bottom--24">
         <table>
           <td><h5>title</h5></td>
-          <td><h5>Teacher</h5></td>
-          <td><h5>description</h5></td>
+          <td><h5>category</h5></td>
+          <!-- <td><h5>description</h5></td> -->
           <td><h5>Picture</h5></td>
-          <td><h5>status</h5></td>
-          <td><h5>join room</h5></td>
-          <tr v-for="elem in this.booked" :key="elem">
+          
+          <td><h5>Create room</h5></td>
+          <tr v-for="elem in this.posts" :key="elem">
             <td>{{ elem.title }}</td>
-            <td>{{ elem.firstName }} {{ elem.lastName }}</td>
-            <td>{{ elem.description }}</td>
+            <td>{{ elem.label_type }} <img class="img" :src="elem.image_type" alt="" /></td>
+            <!-- <td>{{ elem.description }}</td> -->
             <td><img class="img" :src="elem.image_post" alt="" /></td>
-            <td>{{ elem.status_booking }}</td>
-            <td><a href="http://localhost:8080/">join</a></td>
+            
+            <td><a href="http://localhost:8080/">Create</a></td>
           </tr>
         </table>
         <!-- <hr />

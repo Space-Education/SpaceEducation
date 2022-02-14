@@ -12,9 +12,9 @@ var selectAllPosts = function (req, res) {
 };
 // select all posts for home page by id type
 var selectAllPostsByIdType = function (req, res) {
-  var params=req.params.id_type
+  var params = req.params.id_type
   var sql = "SELECT p.*, t.label_type, t.image_type, u.firstName ,u.lastName FROM ((posts p inner join type t on t.id_type = p.id_type) inner join users u on u.id_user=p.id_user) where p.id_type=?"
-  db.query(sql,params,(err, items, fields) => {
+  db.query(sql, params, (err, items, fields) => {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -34,14 +34,16 @@ var selectAllPostsUser = function (req, res) {
     }
   });
 };
+
 // insert post 
+
 var insertPost = function (req, res) {
   var lecture = "INSERT INTO posts SET ?"
   var params = {
     title: req.body.title,
     description: req.body.description,
-    image_post:req.body.image_post,
-    id_type: req.body.id_type,    
+    image_post: req.body.image_post,
+    id_type: req.body.id_type,
     id_user: req.body.id_user
   }
   db.query(lecture, params, (err, results) => {
@@ -109,12 +111,34 @@ var selectUser = function (req, res) {
     }
   });
 };
+// select data of all users
+var selectAllUsers = function (req, res) {
+  sql = "SELECT u.id_user,u.firstName,u.lastName,u.dob,u.phone,u.email,u.image_user,u.id_category,c.label_category from users u inner join category c on u.id_category=c.id_category"
+  db.query(sql, (err, items, fields) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(items);
+    }
+  });
+};
 //select data user for the profile
 var selectProfile = function (req, res) {
-  var params=req.params.id
-  
+  var params = req.params.id
   sql = "SELECT firstName,lastName,dob,phone,email,image_user FROM users WHERE id_user = ?"
   db.query(sql, [params], (err, items, fields) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(items);
+    }
+  });
+};
+var updateUserCategory = function (req, res) {
+  var params = req.params.id
+  option=req.body.id_category
+  sql = "UPDATE users SET id_category = ? WHERE id_user =? "
+  db.query(sql, [option,params], (err, items, fields) => {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -128,13 +152,13 @@ var insertUser = function (req, res) {
   var params = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
-    email: req.body.email,
     password: req.body.password,
+    email:req.body.email,
+    dob:req.body.dob,
     phone: req.body.phone,
-    dob: req.body.dob,
     id_category: req.body.id_category,
-    image_user:req.body.image_user,
-    active:false
+    image_user: req.body.image_user,
+    active: false
   }
   db.query(sql, params, (err, results) => {
     if (err) {
@@ -144,5 +168,32 @@ var insertUser = function (req, res) {
     }
   });
 };
+// insert booking
+var insertBooking =function (req, res) {
+  var sql = "INSERT INTO booking SET ?"
+  var params = {
+    id_user: req.body.id_user,
+    id_post: req.body.id_post,
+  }
+  db.query(sql, params, (err, results) => {
+    if (err) {
+      console.log(err)
+    } else {
+      res.send(results)
+    }
+  });
+};
+// select booking for one user
+var selectBooking=function (req, res) {
+  var params = req.params.id
+  sql = "SELECT b.*, u.firstName,u.lastName ,p.title ,p.description , p.image_post from booking b inner join users u on b.id_user=u.id_user inner join posts p on b.id_post =p.id_post where b.id_user=?"
+  db.query(sql,params, (err, items, fields) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(items);
+    }
+  });
+};
 
-module.exports = { selectProfile,selectAllPostsByIdType,selectCategory, selectAllPosts, insertPost, selectTypes, insertType, insertUser, selectUser, selectAllPostsUser, insertCategory };
+module.exports = {selectBooking,insertBooking, updateUserCategory,selectAllUsers, selectProfile, selectAllPostsByIdType, selectCategory, selectAllPosts, insertPost, selectTypes, insertType, insertUser, selectUser, selectAllPostsUser, insertCategory };
