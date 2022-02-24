@@ -118,7 +118,9 @@ ul {
   position: sticky;
   top: 0;
 }
-
+a:hover {
+    color: #ffffff;
+}
 li {
   float: left;
 }
@@ -132,7 +134,7 @@ li a {
 }
 
 li a:hover {
-  background-color: rgb(67, 33, 146);
+  background-color: rgb(78, 50, 179);
 }
 
 .sidenav {
